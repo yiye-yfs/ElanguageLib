@@ -13,46 +13,65 @@
 namespace ELL{ // E Language Library 的缩写
 	typedef unsigned short int PORT;
 
-	namespace Window {
+	namespace Window {//窗口
 
-		namespace Enum {
+		namespace Enum {//菜单
 
 		}
 
 	}
 
-	namespace String {
+	namespace String {//字符串(文本)
 
 	}
 
-	namespace File {
+	namespace File {//文件
 		
 	}
 
-	namespace Web {
+	namespace Web {//网页
 
 	}
 
-	namespace Mouse {
+	namespace Mouse {//鼠标
 
 	}
 
-	namespace KeyBoard {
+	namespace KeyBoard {//键盘
 
 	}
 
-	namespace Music {
+	namespace Music {//音乐
 
 	}
 
-	namespace Voice {
+	namespace Voice {//音量
 
 	}
 
+	namespace Code {//编码
 
-	namespace Process {
+	}
 
-		namespace Contact {
+	namespace Thread {//线程
+
+	}
+
+	namespace System {//系统
+
+	}
+
+	namespace Directory {//目录
+
+	}
+
+	namespace Time {//时间
+
+	}
+	
+	namespace Process {//进程
+
+		namespace Contact {//进程通讯
 
 		}
 
