@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="_Process.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ElanguageLib.h" />
