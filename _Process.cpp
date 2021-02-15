@@ -221,6 +221,11 @@ DWORD ELL::Process::GetPIDByProcessName(std::string ProcessName, BOOL Case){
     return 0;
 }
 
+std::string ELL::Process::GetExePathByPID(DWORD ProcessId){
+    HANDLE handleSnapshot = CreateToolhelp32Snapshot(8, ProcessId);//here
+    return std::string();
+}
+
 BOOL ELL::Process::IsProcess64Bit(DWORD ProcessId){
     HANDLE handleProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL, ProcessId);
     if (handleProcess != NULL) {
