@@ -13,13 +13,16 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\ElanguageLib">
+      <UniqueIdentifier>{c88ec52c-d575-4ed3-883a-e313b8cecb78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="_Process.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\ElanguageLib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
