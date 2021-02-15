@@ -1,5 +1,5 @@
 //main.cpp
-//仅用于调试
+//Test Lib
 #include <iostream>
 #include "ElanguageLib.h"
 

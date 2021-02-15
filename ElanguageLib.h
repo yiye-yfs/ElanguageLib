@@ -1,18 +1,16 @@
 #pragma once
 #include <Windows.h>
-
 #include <tlhelp32.h>
 #include <psapi.h>
 #include <iphlpapi.h>
 #include <math.h>
-
 #include <string>
 #include <vector>
 
-
 namespace ELL{ // E Language Library 的缩写
 	typedef unsigned short int PORT;
-
+	typedef char* bin;
+	typedef std::string text;
 	namespace Window {//窗口
 
 		namespace Enum {//菜单
@@ -20,67 +18,27 @@ namespace ELL{ // E Language Library 的缩写
 		}
 
 	}
-
 	namespace String {//字符串(文本)
 
 	}
-
 	namespace File {//文件
 		
 	}
-
 	namespace Web {//网页
 
 	}
-
-	namespace Mouse {//鼠标
-
-	}
-
-	namespace KeyBoard {//键盘
-
-	}
-
-	namespace Music {//音乐
-
-	}
-
-	namespace Voice {//音量
-
-	}
-
 	namespace Code {//编码
 
 	}
-
 	namespace Thread {//线程
 
 	}
-
 	namespace System {//系统
 
 	}
-
-	namespace Directory {//目录
-
-	}
-
-	namespace Time {//时间
-
-	}
-	
-	namespace Image {//图片
-
-	}
-	
-	namespace Semaphore {//信号量
-
-	}
-
 	namespace DialogBox {//对话框
 
 	}
-
 	namespace Process {//进程
 
 		namespace Contact {//进程通讯
@@ -217,5 +175,10 @@ namespace ELL{ // E Language Library 的缩写
 		std::string PIDGetExePath(DWORD ProcessId);
 		//通过进程ID获取进程路径
 		//???
+	}
+	namespace kernel {
+		namespace SystemSolve {
+			int ELL::kernel::SystemSolve::MsgBox(ELL::text Tips, int Button, ELL::text WindowText, int WindowHandle);
+		}
 	}
 }
