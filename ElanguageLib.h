@@ -146,7 +146,6 @@ namespace ELL{ // E Language Library 的缩写
 
 		BOOL SetCannotOpen();
 		//设置当前进程禁止被打开
-		//???
 
 		BOOL SetPriorityClass(DWORD ProcessId = NULL, DWORD Priority = 0);
 		//设置一个进程的优先级别,成功返回TRUE，失败返回FALSE。特殊进程需要特权

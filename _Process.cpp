@@ -74,7 +74,7 @@ BOOL ELL::Process::IsPIDVaild(DWORD ProcessId){
     DWORD cbNeeded = 0;
     BOOL Bool = EnumProcesses(processIdArray,1024 * sizeof(DWORD),&cbNeeded);
     if (Bool == TRUE) {
-        for (UINT i = 0; i <= (unsigned)cbNeeded / 4; i++) {
+        for (UINT i = 0; i <= cbNeeded / 4; i++) {
             if (processIdArray[i] == ProcessId) {
                 return TRUE;
             }
