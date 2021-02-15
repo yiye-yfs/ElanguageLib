@@ -217,6 +217,18 @@ BOOL ELL::Process::IsProcess64Bit(DWORD ProcessId){
     return false;
 }
 
+BOOL ELL::Process::SetCannotOpen(){
+    BYTE buf[0x200] = {0};
+    PACL acl = (PACL)&buf;
+    if (InitializeAcl(acl, 1024, ACL_REVISION) == FALSE) {
+        return FALSE;
+    }
+    if (SetSecurityInfo((HANDLE)-1, (SE_OBJECT_TYPE)6, 2147483652.000000, 0, 0, acl, 0) != FALSE) {
+        return FALSE;
+    }
+    return TRUE;
+}
+
 BOOL ELL::Process::SetPriorityClass(DWORD ProcessId, DWORD Priority){
     if (Priority == 0) { Priority = HIGH_PRIORITY_CLASS; }
     if (Priority == 1) { Priority = ABOVE_NORMAL_PRIORITY_CLASS; }

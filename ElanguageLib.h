@@ -4,6 +4,8 @@
 #include <tlhelp32.h>
 #include <psapi.h>
 #include <iphlpapi.h>
+#include <aclapi.h>
+
 #include <math.h>
 
 #include <string>
