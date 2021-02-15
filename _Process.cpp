@@ -1,5 +1,6 @@
 #include "ElanguageLib.h"
 
+
 BOOL ELL::Process::DEPProtect(DWORD Flags){
     if (GetSystemDEPPolicy() < 2) {
         return false;
@@ -123,16 +124,16 @@ INT ELL::Process::Enum(std::vector<PROCESSENTRY32>& ProcessInfoList){
 VOID ELL::Process::Pause(DWORD ProcessId, BOOL status){
     HANDLE handleProcess = OpenProcess(2035711, NULL, ProcessId);
     if (handleProcess == INVALID_HANDLE_VALUE) { return; }
-    /*
+    PROC procAPIAddress = NULL;
     if (status) {
-        PROC procAPIAddress = GetProcAddress(GetModuleHandleA("ntdll.dll"),"ZwSuspendProcess");
+        procAPIAddress = GetProcAddress(GetModuleHandleA("ntdll.dll"),"ZwSuspendProcess");
         (*procAPIAddress)();
     }
     else {
-        PROC procAPIAddress = GetProcAddress(GetModuleHandleA("ntdll.dll"),"ZwResumeProcess");
+        procAPIAddress = GetProcAddress(GetModuleHandleA("ntdll.dll"),"ZwResumeProcess");
         (*procAPIAddress)();
     }
-    */
+    
     CloseHandle(handleProcess);
     return;
 }
