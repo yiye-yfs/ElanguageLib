@@ -1,13 +1,13 @@
 #include "ElanguageLib.h"
 
-bool ELL::Process::DEPProtect(DWORD Flags){
+BOOL ELL::Process::DEPProtect(DWORD Flags){
     if (GetSystemDEPPolicy() < 2) {
         return false;
     }
     return SetProcessDEPPolicy(Flags);
 }
 
-bool ELL::Process::SetDubugPrivilege(DWORD ProcessId){
+BOOL ELL::Process::SetDubugPrivilege(DWORD ProcessId){
     if (ProcessId == NULL) { ProcessId = GetCurrentProcessId(); }
     HANDLE handleProcess = OpenProcess(2035711, 0, ProcessId);
     if (handleProcess == INVALID_HANDLE_VALUE) { return false; }
@@ -25,7 +25,7 @@ bool ELL::Process::SetDubugPrivilege(DWORD ProcessId){
     return ret;
 }
 
-int ELL::Process::PIDGetModules(DWORD ProcessID, std::vector <MODULEENTRY32>& ModulesList){
+INT ELL::Process::PIDGetModules(DWORD ProcessID, std::vector <MODULEENTRY32>& ModulesList){
     if (ProcessID == NULL) {
         ProcessID = GetCurrentProcessId();
     }
@@ -67,7 +67,7 @@ std::string ELL::Process::PIDGetProcessName(DWORD ProcessID){
     return "";
 }
 
-bool ELL::Process::IsPIDVaild(DWORD ProcessId){
+BOOL ELL::Process::IsPIDVaild(DWORD ProcessId){
     if (ProcessId == NULL) { return false; }
     DWORD processIdArray[1024] = {0};
     DWORD cbNeeded = 0;
@@ -103,7 +103,7 @@ DWORD ELL::Process::CreateProcess(std::string ExePath, std::string CommandLine, 
     return CreateProcessA(ExePath.c_str(), (LPSTR)CommandLine.c_str(), NULL, NULL, NULL, NULL, NULL, "", &WindowInfo, ProcessInfo) ? ProcessInfo->dwProcessId : NULL;
 }
 
-int ELL::Process::Enum(std::vector<PROCESSENTRY32>& ProcessInfoList){
+INT ELL::Process::Enum(std::vector<PROCESSENTRY32>& ProcessInfoList){
     HANDLE handleSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPALL,NULL);
     if (handleSnapshot == INVALID_HANDLE_VALUE) { return 0; }
     ProcessInfoList.clear();
@@ -120,7 +120,7 @@ int ELL::Process::Enum(std::vector<PROCESSENTRY32>& ProcessInfoList){
     return number;
 }
 
-void ELL::Process::Pause(DWORD ProcessId, bool status){
+VOID ELL::Process::Pause(DWORD ProcessId, BOOL status){
     HANDLE handleProcess = OpenProcess(2035711, NULL, ProcessId);
     if (handleProcess == INVALID_HANDLE_VALUE) { return; }
     /*
@@ -137,7 +137,7 @@ void ELL::Process::Pause(DWORD ProcessId, bool status){
     return;
 }
 
-unsigned int ELL::Process::MemoryUseSituation(DWORD ProcessId, int ShowType){
+unsigned int ELL::Process::MemoryUseSituation(DWORD ProcessId, INT ShowType){
     if (ShowType == NULL || ShowType < 0) {
         ShowType = 1;
     }
@@ -152,7 +152,7 @@ unsigned int ELL::Process::MemoryUseSituation(DWORD ProcessId, int ShowType){
     return 0;
 }
 
-int ELL::Process::GetPriorityClass(DWORD ProcessId){
+INT ELL::Process::GetPriorityClass(DWORD ProcessId){
     HANDLE handleProcess = ProcessId == NULL ? GetCurrentProcess() : OpenProcess(1024, NULL, ProcessId);
     if (handleProcess == INVALID_HANDLE_VALUE) { return -1; }
     DWORD Class =  ::GetPriorityClass(handleProcess);
@@ -167,7 +167,7 @@ int ELL::Process::GetPriorityClass(DWORD ProcessId){
     return type;
 }
 
-int ELL::Process::GetHandleNumber(DWORD ProcessId){
+INT ELL::Process::GetHandleNumber(DWORD ProcessId){
     HANDLE handleProcess = ProcessId == NULL ? GetCurrentProcess() : OpenProcess(2035711, NULL, ProcessId);
     DWORD count = 0;
     if (!GetProcessHandleCount(handleProcess, &count)) {
@@ -198,11 +198,11 @@ std::string ELL::Process::GetProcessStartTime(DWORD ProcessId){
     return std::string();//???
 }
 
-DWORD ELL::Process::ProcessNameGetPID(std::string ProcessName, bool Case){
+DWORD ELL::Process::ProcessNameGetPID(std::string ProcessName, BOOL Case){
     return 0;
 }
 
-bool ELL::Process::IsProcess64Bit(DWORD ProcessId){
+BOOL ELL::Process::IsProcess64Bit(DWORD ProcessId){
     HANDLE handleProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL, ProcessId);
     if (handleProcess != NULL) {
         BOOL isWow64 = false;
@@ -216,7 +216,7 @@ bool ELL::Process::IsProcess64Bit(DWORD ProcessId){
     return false;
 }
 
-bool ELL::Process::SetPriorityClass(DWORD ProcessId, DWORD Priority){
+BOOL ELL::Process::SetPriorityClass(DWORD ProcessId, DWORD Priority){
     if (Priority == 0) { Priority = HIGH_PRIORITY_CLASS; }
     if (Priority == 1) { Priority = ABOVE_NORMAL_PRIORITY_CLASS; }
     if (Priority == 2) { Priority = REALTIME_PRIORITY_CLASS; }
@@ -230,14 +230,14 @@ bool ELL::Process::SetPriorityClass(DWORD ProcessId, DWORD Priority){
     return ret;
 }
 
-bool ELL::Process::Terminate(DWORD ProcessId){
+BOOL ELL::Process::Terminate(DWORD ProcessId){
     if (ProcessId == NULL) { ProcessId = GetCurrentProcessId(); }
     HANDLE handleProcess = OpenProcess(1, 0, ProcessId);
     bool ret = TerminateProcess(handleProcess,0) == 1;
     return ret;
 }
 
-bool ELL::Process::Terminate(std::string ProcessName){
+BOOL ELL::Process::Terminate(std::string ProcessName){
     /*
     if (ProcessName == "") {
         CHAR tmp[MAX_PATH] = { NULL };
