@@ -149,8 +149,8 @@ namespace ELL{ // E Language Library 的缩写
 		BOOL SetPriorityClass(DWORD ProcessId = NULL, DWORD Priority = 0);
 		//设置一个进程的优先级别,成功返回true，失败返回false。特殊进程需要特权
 
-		BOOL Terminate(DWORD ProcessId = NULL);
-		BOOL Terminate(std::string ProcessName = "");//???
+		BOOL TerminateProcessByPID(DWORD ProcessId = NULL);
+		BOOL TerminateProcessByProcessName(std::string ProcessName = "");//???
 		//结束指定进程。成功返回true，失败返回false。
 
 
