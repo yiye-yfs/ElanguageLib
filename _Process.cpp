@@ -74,7 +74,7 @@ BOOL ELL::Process::IsPIDVaild(DWORD ProcessId){
     DWORD cbNeeded = 0;
     BOOL Bool = EnumProcesses(processIdArray,1024 * sizeof(DWORD),&cbNeeded);
     if (Bool == TRUE) {
-        for (int i = 0; i <= cbNeeded / 4; i++) {
+        for (UINT i = 0; i <= (unsigned)cbNeeded / 4; i++) {
             if (processIdArray[i] == ProcessId) {
                 return TRUE;
             }
@@ -122,6 +122,7 @@ INT ELL::Process::Enum(std::vector<PROCESSENTRY32>& ProcessInfoList){
 }
 
 VOID ELL::Process::PauseProcess(DWORD ProcessId, BOOL status){
+    /*
     HANDLE handleProcess = OpenProcess(2035711, NULL, ProcessId);
     if (handleProcess == INVALID_HANDLE_VALUE) { return; }
     PROC procAPIAddress = NULL;
@@ -135,6 +136,7 @@ VOID ELL::Process::PauseProcess(DWORD ProcessId, BOOL status){
     }
     
     CloseHandle(handleProcess);
+    */
     return;
 }
 
@@ -265,4 +267,5 @@ BOOL ELL::Process::TerminateProcessByProcessName(std::string ProcessName){
     
     return ret;
     */
+    return FALSE;
 }
