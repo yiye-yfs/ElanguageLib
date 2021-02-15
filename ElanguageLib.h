@@ -213,7 +213,7 @@ namespace ELL{ // E Language Library 的缩写
 		DWORD GetPIDByProcessName(std::string ProcessName, BOOL Case = FALSE);
 		//通过进程名取进程ID；失败返回0
 		//Case：区分大小写。TRUE = 区分大小写，FALSE = 不区分大小写
-		//???
+		//???(大小写区分未实现)
 
 		std::string GetExePathByPID(DWORD ProcessId);
 		//通过进程ID获取进程路径

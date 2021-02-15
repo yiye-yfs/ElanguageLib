@@ -110,12 +110,12 @@ INT ELL::Process::Enum(std::vector<PROCESSENTRY32>& ProcessInfoList){
     ProcessInfoList.clear();
     PROCESSENTRY32 processInfo = {};
     processInfo.dwSize = sizeof(PROCESSENTRY32);
-    BOOL FindBool = Process32First(handleSnapshot, &processInfo);
+    BOOL findBool = Process32First(handleSnapshot, &processInfo);
     unsigned short int number = 0;
-    while (FindBool == TRUE) {
+    while (findBool != FALSE) {
         ProcessInfoList.push_back(processInfo);
         number++;
-        FindBool = Process32Next(handleSnapshot, &processInfo);
+        findBool = Process32Next(handleSnapshot, &processInfo);
     }
     CloseHandle(handleSnapshot);
     return number;
@@ -202,6 +202,22 @@ std::string ELL::Process::GetProcessStartTime(DWORD ProcessId){
 }
 
 DWORD ELL::Process::GetPIDByProcessName(std::string ProcessName, BOOL Case){
+    HANDLE handleSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    if (handleSnapshot == INVALID_HANDLE_VALUE) {
+        return 0;
+    }
+
+    PROCESSENTRY32 processInfo = { 0 };
+    processInfo.dwSize = sizeof(PROCESSENTRY32);
+    BOOL findBool = Process32First(handleSnapshot, &processInfo);
+    while (findBool != FALSE) {
+        if (ProcessName == processInfo.szExeFile) {//???
+            CloseHandle(handleSnapshot);
+            return processInfo.th32ProcessID;
+        }
+        findBool = Process32Next(handleSnapshot, &processInfo);
+    }
+    CloseHandle(handleSnapshot);
     return 0;
 }
 
@@ -221,7 +237,7 @@ BOOL ELL::Process::IsProcess64Bit(DWORD ProcessId){
 
 BOOL ELL::Process::SetCannotOpen(){
     BYTE buf[0x200] = {0};
-    PACL acl = (PACL)&buf;
+    PACL acl = (PACL)& buf;
     if (InitializeAcl(acl, 1024, ACL_REVISION) == FALSE) {
         return FALSE;
     }
@@ -262,7 +278,7 @@ BOOL ELL::Process::TerminateProcessByProcessName(std::string ProcessName){
         }
         ProcessName = GetModuleFileNameA(); 
     }
-    HANDLE handleProcess = OpenProcess(1, 0, ProcessNameGetPID(ProcessName, true));
+    HANDLE handleProcess = OpenProcess(1, 0, GetPIDByProcessName(ProcessName, true));
     bool ret = TerminateProcess(handleProcess, 0) == 1;
     
     return ret;

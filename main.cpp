@@ -7,7 +7,7 @@ using namespace std;
 using namespace ELL;
 
 int main() {
-	cout << Process::SetCannotOpen() << endl;
+	cout << Process::GetPIDByProcessName("QQ.exe") << endl;
 	
 	while (1);
 	return 0;
