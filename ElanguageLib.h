@@ -11,13 +11,13 @@
 
 
 namespace ELL{ //E Language Library 的缩写
-	
+	typedef unsigned short int PORT;
+
 	namespace File {
 		
 	}
 
 	namespace Process {
-		typedef unsigned short int PORT;
 
 		bool DEPProtect(DWORD Flags = 0);
 		//数据执行保护开关; 成功返回true, 失败返回false

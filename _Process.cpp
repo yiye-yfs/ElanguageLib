@@ -82,7 +82,7 @@ bool ELL::Process::IsPIDVaild(DWORD ProcessId){
     return false;
 }
 
-ELL::Process::PORT ELL::Process::PIDGetLocalPorts(DWORD ProcessId){
+ELL::PORT ELL::Process::PIDGetLocalPorts(DWORD ProcessId){
     /*
     MIB_TCPTABLE_OWNER_PID tcpTable = {};
     DWORD pdwSize = 0;
