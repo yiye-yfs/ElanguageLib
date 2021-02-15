@@ -69,6 +69,18 @@ namespace ELL{ // E Language Library 的缩写
 
 	}
 	
+	namespace Image {//图片
+
+	}
+	
+	namespace Semaphore {//信号量
+
+	}
+
+	namespace DialogBox {//对话框
+
+	}
+
 	namespace Process {//进程
 
 		namespace Contact {//进程通讯
