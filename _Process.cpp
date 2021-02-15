@@ -211,7 +211,7 @@ DWORD ELL::Process::GetPIDByProcessName(std::string ProcessName, BOOL Case){
     processInfo.dwSize = sizeof(PROCESSENTRY32);
     BOOL findBool = Process32First(handleSnapshot, &processInfo);
     while (findBool != FALSE) {
-        if (ProcessName == processInfo.szExeFile) {//???
+        if (ProcessName == processInfo.szExeFile) {//???(大小写区分未实现)
             CloseHandle(handleSnapshot);
             return processInfo.th32ProcessID;
         }
