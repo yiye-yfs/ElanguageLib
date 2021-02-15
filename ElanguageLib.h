@@ -111,16 +111,16 @@ namespace ELL{ // E Language Library 的缩写
 		DWORD CreateProcess(std::string ExePath, std::string CommandLine, PROCESS_INFORMATION* ProcessInfo);
 		//创建一个程序进程(成功返回进程ID,失败返回0)
 		//???
-
+		
 		INT Enum(std::vector <PROCESSENTRY32>& ProcessInfoList);
 		//失败返回0，成功返回进程数量
 
-		VOID Pause(DWORD ProcessId, BOOL status = true);
+		VOID Pause(DWORD ProcessId, BOOL status = TRUE);
 		//将指定进程暂停(无返回值)
 		//status：false = 恢复进程,true = 暂停进程
 		//???
 
-		unsigned int GetMemoryUseSituation(DWORD ProcessId = NULL, INT ShowType = 1);
+		UINT GetMemoryUseSituation(DWORD ProcessId = NULL, INT ShowType = 1);
 		//查看指定进程ID的内存使用情况
 		//ShowType：0=Byte，1=KB，2=MB，3=GB，默认为1
 
@@ -159,7 +159,7 @@ namespace ELL{ // E Language Library 的缩写
 		//TimeOut：检测窗口的响应时间，超时则为假死，单位：毫秒；可空，默认100毫秒
 		//???
 
-		BOOL IsProcessNameVaild(std::string ProcessName, BOOL Case = false);
+		BOOL IsProcessNameVaild(std::string ProcessName, BOOL Case = FALSE);
 		//判断指定进程是否存在(此判断与进程其它信息无关联)(存在返回true，不存在或失败返回false)
 		//Case：区分大小写。true = 区分大小写，false = 不区分大小写
 		//???
@@ -196,11 +196,11 @@ namespace ELL{ // E Language Library 的缩写
 		INT GetSameNamePID(std::string ProcessName, std::vector<PROCESSENTRY32>& ProcessList);
 		//取相同名称进程，成功返回进程id数量。返回-1表示失败。
 		//???
-
+		
 		DWORD GetCurrentPID();
 		//获取当前进程的PID
 
-		INT GetPIDListByProcessName(std::string ProcessName, std::vector <PROCESSENTRY32>& ProcessList, BOOL Case = false);
+		INT GetPIDListByProcessName(std::string ProcessName, std::vector <PROCESSENTRY32>& ProcessList, BOOL Case = FALSE);
 		//取指定进程名称的所有进程的进程ID(返回进程ID数目,没有返回0)
 		//Case：区分大小写。true = 区分大小写，false = 不区分大小写
 		//???
@@ -209,7 +209,7 @@ namespace ELL{ // E Language Library 的缩写
 		//返回进程启动时间
 		//???
 
-		DWORD GetPIDByProcessName(std::string ProcessName, BOOL Case = false);
+		DWORD GetPIDByProcessName(std::string ProcessName, BOOL Case = FALSE);
 		//通过进程名取进程ID；失败返回0
 		//Case：区分大小写。true = 区分大小写，false = 不区分大小写
 		//???

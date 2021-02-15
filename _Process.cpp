@@ -137,7 +137,7 @@ VOID ELL::Process::Pause(DWORD ProcessId, BOOL status){
     return;
 }
 
-unsigned int ELL::Process::GetMemoryUseSituation(DWORD ProcessId, INT ShowType){
+UINT ELL::Process::GetMemoryUseSituation(DWORD ProcessId, INT ShowType){
     if (ShowType == NULL || ShowType < 0) {
         ShowType = 1;
     }
