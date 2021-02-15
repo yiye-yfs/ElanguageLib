@@ -121,7 +121,7 @@ INT ELL::Process::Enum(std::vector<PROCESSENTRY32>& ProcessInfoList){
     return number;
 }
 
-VOID ELL::Process::Pause(DWORD ProcessId, BOOL status){
+VOID ELL::Process::PauseProcess(DWORD ProcessId, BOOL status){
     HANDLE handleProcess = OpenProcess(2035711, NULL, ProcessId);
     if (handleProcess == INVALID_HANDLE_VALUE) { return; }
     PROC procAPIAddress = NULL;

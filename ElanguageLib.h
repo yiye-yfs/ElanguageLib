@@ -88,11 +88,11 @@ namespace ELL{ // E Language Library 的缩写
 		}
 
 		BOOL DEPProtect(DWORD Flags = 0);
-		//数据执行保护开关; 成功返回true, 失败返回false
+		//数据执行保护开关; 成功返回TRUE, 失败返回FALSE
 		//dwFlags：如果DEP系统策略为OptIn或OptOut并且为该进程启用了DEP, 则将dwFlags设置为0将禁用该进程的DEP
 
 		BOOL SetDubugPrivilege(DWORD ProcessId = NULL);
-		//成功返回true，把一个进程的权限提升到调试级权限
+		//成功返回TRUE，把一个进程的权限提升到调试级权限
 		//ProcessId：如果为空则默认为当前进程ID
 
 		INT GetModulesByPID(DWORD ProcessID, std::vector <MODULEENTRY32>& ModulesList);//通过PID获取模块
@@ -115,9 +115,9 @@ namespace ELL{ // E Language Library 的缩写
 		INT Enum(std::vector <PROCESSENTRY32>& ProcessInfoList);
 		//失败返回0，成功返回进程数量
 
-		VOID Pause(DWORD ProcessId, BOOL status = TRUE);
+		VOID PauseProcess(DWORD ProcessId, BOOL status = TRUE);
 		//将指定进程暂停(无返回值)
-		//status：false = 恢复进程,true = 暂停进程
+		//status：FALSE = 恢复进程,TRUE = 暂停进程
 		//???
 
 		UINT GetMemoryUseSituation(DWORD ProcessId = NULL, INT ShowType = 1);
@@ -125,10 +125,10 @@ namespace ELL{ // E Language Library 的缩写
 		//ShowType：0=Byte，1=KB，2=MB，3=GB，默认为1
 
 		INT GetPriorityClass(DWORD ProcessId = NULL);
-		//特殊进程需要特权，检索指定的进程的优先级。返回值：0=最高,1=高于标准,2=实时,3=标准,4=低于标准,5=低,返回-1表示无权限访问进程。
+		//特殊进程需要特权，检索指定的进程的优先级。返回值：0=最高,1=高于标准,2=实时,3=标准,4=低于标准,5=低,返回-1表示无权限访问进程
 
 		INT GetHandleNumber(DWORD ProcessId = NULL);
-		//获取指定进程句柄数量,与XP系统任务管理器功能一样，失败返回-1。特殊进程需要特权.
+		//获取指定进程句柄数量,与XP系统任务管理器功能一样，失败返回-1。特殊进程需要特权
 
 		std::string GetCommandLine32(DWORD ProcessId);
 		//取指定进程ID的命令行.32位系统专用
@@ -147,11 +147,11 @@ namespace ELL{ // E Language Library 的缩写
 		//???
 
 		BOOL SetPriorityClass(DWORD ProcessId = NULL, DWORD Priority = 0);
-		//设置一个进程的优先级别,成功返回true，失败返回false。特殊进程需要特权
+		//设置一个进程的优先级别,成功返回TRUE，失败返回FALSE。特殊进程需要特权
 
 		BOOL TerminateProcessByPID(DWORD ProcessId = NULL);
 		BOOL TerminateProcessByProcessName(std::string ProcessName = "");//???
-		//结束指定进程。成功返回true，失败返回false。
+		//结束指定进程。成功返回TRUE，失败返回FALSE。
 
 
 		BOOL IsProcessSuspending(DWORD ProcessId, INT TimeOut = 100);
@@ -160,8 +160,8 @@ namespace ELL{ // E Language Library 的缩写
 		//???
 
 		BOOL IsProcessNameVaild(std::string ProcessName, BOOL Case = FALSE);
-		//判断指定进程是否存在(此判断与进程其它信息无关联)(存在返回true，不存在或失败返回false)
-		//Case：区分大小写。true = 区分大小写，false = 不区分大小写
+		//判断指定进程是否存在(此判断与进程其它信息无关联)(存在返回TRUE，不存在或失败返回FALSE)
+		//Case：区分大小写。TRUE = 区分大小写，FALSE = 不区分大小写
 		//???
 
 		BOOL IsProcess64Bit(DWORD ProcessId = NULL);
@@ -202,7 +202,7 @@ namespace ELL{ // E Language Library 的缩写
 
 		INT GetPIDListByProcessName(std::string ProcessName, std::vector <PROCESSENTRY32>& ProcessList, BOOL Case = FALSE);
 		//取指定进程名称的所有进程的进程ID(返回进程ID数目,没有返回0)
-		//Case：区分大小写。true = 区分大小写，false = 不区分大小写
+		//Case：区分大小写。TRUE = 区分大小写，FALSE = 不区分大小写
 		//???
 
 		std::string GetProcessStartTime(DWORD ProcessId = NULL);
@@ -211,7 +211,7 @@ namespace ELL{ // E Language Library 的缩写
 
 		DWORD GetPIDByProcessName(std::string ProcessName, BOOL Case = FALSE);
 		//通过进程名取进程ID；失败返回0
-		//Case：区分大小写。true = 区分大小写，false = 不区分大小写
+		//Case：区分大小写。TRUE = 区分大小写，FALSE = 不区分大小写
 		//???
 
 		std::string GetExePathByPID(DWORD ProcessId);
