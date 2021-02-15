@@ -25,7 +25,7 @@ BOOL ELL::Process::SetDubugPrivilege(DWORD ProcessId){
     return ret;
 }
 
-INT ELL::Process::PIDGetModules(DWORD ProcessID, std::vector <MODULEENTRY32>& ModulesList){
+INT ELL::Process::GetModulesByPID(DWORD ProcessID, std::vector <MODULEENTRY32>& ModulesList){
     if (ProcessID == NULL) {
         ProcessID = GetCurrentProcessId();
     }
@@ -47,7 +47,7 @@ INT ELL::Process::PIDGetModules(DWORD ProcessID, std::vector <MODULEENTRY32>& Mo
     return modulesNumber;
 }
 
-std::string ELL::Process::PIDGetProcessName(DWORD ProcessID){
+std::string ELL::Process::GetProcessNameByPID(DWORD ProcessID){
     if (ProcessID == NULL) {
         ProcessID = GetCurrentProcessId();
     }
@@ -82,7 +82,7 @@ BOOL ELL::Process::IsPIDVaild(DWORD ProcessId){
     return false;
 }
 
-ELL::PORT ELL::Process::PIDGetLocalPorts(DWORD ProcessId){
+ELL::PORT ELL::Process::GetLocalPortsByPID(DWORD ProcessId){
     /*
     MIB_TCPTABLE_OWNER_PID tcpTable = {};
     DWORD pdwSize = 0;
@@ -137,7 +137,7 @@ VOID ELL::Process::Pause(DWORD ProcessId, BOOL status){
     return;
 }
 
-unsigned int ELL::Process::MemoryUseSituation(DWORD ProcessId, INT ShowType){
+unsigned int ELL::Process::GetMemoryUseSituation(DWORD ProcessId, INT ShowType){
     if (ShowType == NULL || ShowType < 0) {
         ShowType = 1;
     }
@@ -198,7 +198,7 @@ std::string ELL::Process::GetProcessStartTime(DWORD ProcessId){
     return std::string();//???
 }
 
-DWORD ELL::Process::ProcessNameGetPID(std::string ProcessName, BOOL Case){
+DWORD ELL::Process::GetPIDByProcessName(std::string ProcessName, BOOL Case){
     return 0;
 }
 

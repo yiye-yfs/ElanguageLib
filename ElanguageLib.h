@@ -95,16 +95,16 @@ namespace ELL{ // E Language Library 的缩写
 		//成功返回true，把一个进程的权限提升到调试级权限
 		//ProcessId：如果为空则默认为当前进程ID
 
-		INT PIDGetModules(DWORD ProcessID, std::vector <MODULEENTRY32>& ModulesList);//通过PID获取模块
+		INT GetModulesByPID(DWORD ProcessID, std::vector <MODULEENTRY32>& ModulesList);//通过PID获取模块
 		//失败为0，成功返回模块数量
 
-		std::string PIDGetProcessName(DWORD ProcessID = NULL);
+		std::string GetProcessNameByPID(DWORD ProcessID = NULL);
 		//通过进程ID取得该进程执行文件名，也就是进程名
 
 		BOOL IsPIDVaild(DWORD ProcessId);
 		//判断一个进程ID是否存在（有效）
 
-		PORT PIDGetLocalPorts(DWORD ProcessId);
+		PORT GetLocalPortsByPID(DWORD ProcessId);
 		//通过进程PID取出本地端口
 		//???
 
@@ -120,7 +120,7 @@ namespace ELL{ // E Language Library 的缩写
 		//status：false = 恢复进程,true = 暂停进程
 		//???
 
-		unsigned int MemoryUseSituation(DWORD ProcessId = NULL, INT ShowType = 1);
+		unsigned int GetMemoryUseSituation(DWORD ProcessId = NULL, INT ShowType = 1);
 		//查看指定进程ID的内存使用情况
 		//ShowType：0=Byte，1=KB，2=MB，3=GB，默认为1
 
@@ -138,7 +138,7 @@ namespace ELL{ // E Language Library 的缩写
 		//取指定进程ID的命令行.64位系统专用
 		//???
 
-		PORT PortGetPID(PORT Port);
+		PORT GetPIDByPort(PORT Port);
 		//通过本地端口取出进程PID
 		//???
 
@@ -200,7 +200,7 @@ namespace ELL{ // E Language Library 的缩写
 		DWORD GetCurrentPID();
 		//获取当前进程的PID
 
-		INT ProcessNameGetPIDList(std::string ProcessName, std::vector <PROCESSENTRY32>& ProcessList, BOOL Case = false);
+		INT GetPIDListByProcessName(std::string ProcessName, std::vector <PROCESSENTRY32>& ProcessList, BOOL Case = false);
 		//取指定进程名称的所有进程的进程ID(返回进程ID数目,没有返回0)
 		//Case：区分大小写。true = 区分大小写，false = 不区分大小写
 		//???
@@ -209,12 +209,12 @@ namespace ELL{ // E Language Library 的缩写
 		//返回进程启动时间
 		//???
 
-		DWORD ProcessNameGetPID(std::string ProcessName, BOOL Case = false);
+		DWORD GetPIDByProcessName(std::string ProcessName, BOOL Case = false);
 		//通过进程名取进程ID；失败返回0
 		//Case：区分大小写。true = 区分大小写，false = 不区分大小写
 		//???
 
-		std::string PIDGetExePath(DWORD ProcessId);
+		std::string GetExePathByPID(DWORD ProcessId);
 		//通过进程ID获取进程路径
 		//???
 	}
