@@ -281,7 +281,8 @@ BOOL ELL::Process::TerminateProcessByPID(DWORD ProcessId){
     return ret;
 }
 
-BOOL ELL::Process::TerminateProcessByProcessName(std::string ProcessName, BOOL Case = TRUE) {
+BOOL ELL::Process::TerminateProcessByProcessName(std::string ProcessName, BOOL Case) {
+    /*
     if (ProcessName == "") {
         CHAR tmp[MAX_PATH] = { NULL };
         if (!GetModuleFileNameA(NULL,tmp,MAX_PATH)) {
@@ -293,4 +294,6 @@ BOOL ELL::Process::TerminateProcessByProcessName(std::string ProcessName, BOOL C
     BOOL terminateResult = TerminateProcess(handleProcess, 0);
     CloseHandle(handleProcess);
     return terminateResult;
+    */
+    return 0;
 }
