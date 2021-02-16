@@ -7,7 +7,7 @@
 #include <aclapi.h>
 
 #include <math.h>
-#include <stdlib.h>
+#include <cstdlib>
 
 #include <string>
 #include <vector>
@@ -16,14 +16,10 @@
 namespace ELL{ // E Language Library 的缩写
 	typedef unsigned short int PORT;
 	
-	
-	std::string IntToString(INT Buf);
-	std::string DoubleToString(DOUBLE Buf);
-	//数字转换字符串
-	
 	INT StringToInt(std::string Buf);
 	DOUBLE StringToDouble(std::string Buf);
 	//字符串转换数字
+	
 
 	namespace Window {//窗口
 
@@ -220,7 +216,6 @@ namespace ELL{ // E Language Library 的缩写
 
 		std::string GetProcessStartTime(DWORD ProcessId = NULL);
 		//返回进程启动时间
-		//???
 
 		DWORD GetPIDByProcessName(std::string ProcessName, BOOL Case = FALSE);
 		//通过进程名取进程ID；失败返回0

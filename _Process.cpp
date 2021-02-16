@@ -205,9 +205,14 @@ std::string ELL::Process::GetProcessStartTime(DWORD ProcessId){
     CloseHandle(handleProcess);
     SYSTEMTIME userSystemTime = {};
     FileTimeToSystemTime(&createTime, &userSystemTime);
-    itoa();
-    std::string ret = 1;
-    return ret;//???
+    std::string ret = 
+        std::to_string(userSystemTime.wYear) 
+        + ELL::String::FillZero(std::to_string(userSystemTime.wMonth), 2)
+        + ELL::String::FillZero(std::to_string(userSystemTime.wDay), 2)
+        + ELL::String::FillZero(std::to_string(userSystemTime.wHour + 8), 2)
+        + ELL::String::FillZero(std::to_string(userSystemTime.wMinute), 2)
+        + ELL::String::FillZero(std::to_string(userSystemTime.wSecond), 2);
+    return ret;
 }
 
 DWORD ELL::Process::GetPIDByProcessName(std::string ProcessName, BOOL Case){
