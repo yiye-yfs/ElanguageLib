@@ -7,7 +7,6 @@
 #include <aclapi.h>
 
 #include <math.h>
-#include <cstdlib>
 
 #include <string>
 #include <vector>
@@ -20,6 +19,9 @@ namespace ELL{ // E Language Library 的缩写
 	DOUBLE StringToDouble(std::string Buf);
 	//字符串转换数字
 	
+	PROC GetAPIAddress(std::string DllName, std::string APIName);
+	//获取API的调用地址
+
 
 	namespace Window {//窗口
 
@@ -125,9 +127,9 @@ namespace ELL{ // E Language Library 的缩写
 		INT Enum(std::vector <PROCESSENTRY32>& ProcessInfoList);
 		//失败返回0，成功返回进程数量
 
-		VOID PauseProcess(DWORD ProcessId, BOOL status = TRUE);
+		VOID PauseProcess(DWORD ProcessId, bool status = true);
 		//将指定进程暂停(无返回值)
-		//status：FALSE = 恢复进程,TRUE = 暂停进程
+		//status：false = 恢复进程,true = 暂停进程
 		//???
 
 		UINT GetMemoryUseSituation(DWORD ProcessId = NULL, INT ShowType = 1);
@@ -168,16 +170,16 @@ namespace ELL{ // E Language Library 的缩写
 		//TimeOut：检测窗口的响应时间，超时则为假死，单位：毫秒；可空，默认100毫秒
 		//???
 
-		BOOL IsProcessNameVaild(std::string ProcessName, BOOL Case = FALSE);
+		BOOL IsProcessNameVaild(std::string ProcessName, bool Case = false);
 		//判断指定进程是否存在(此判断与进程其它信息无关联)(存在返回TRUE，不存在或失败返回FALSE)
 		//Case：区分大小写。TRUE = 区分大小写，FALSE = 不区分大小写
-		//???
+		//??? （未实现大小写）
 
 		BOOL IsProcess64Bit(DWORD ProcessId = NULL);
 		//判断进程是否为64位
 
-		INT GetThreadsNumber(DWORD ProcessId);
-		INT GetThreadsNumber(std::string ProcessName);
+		INT GetThreadsNumberByPID(DWORD ProcessId);
+		INT GetThreadsNumberByProcessName(std::string ProcessName);
 		//通过进程ID或进程名获取指定进程线程数。
 		//???
 
@@ -193,23 +195,21 @@ namespace ELL{ // E Language Library 的缩写
 		//获取指定进程的用户名
 		//???
 
-		DWORD GetProcessParentHandle(DWORD ProcessId);
-		DWORD GetProcessParentHandle(std::string ProcessName);
+		DWORD GetProcessParentHandleByPID(DWORD ProcessId);
+		DWORD GetProcessParentHandleByProcessName(std::string ProcessName);
 		//根据进程名或进程ID取出进程父ID，失败返回-1。
 		//???
 
 		std::string GetCurrentCommandLine();
 		//取当前进程的命令行
-		//???
 
-		INT GetSameNamePID(std::string ProcessName, std::vector<PROCESSENTRY32>& ProcessList);
+		INT GetPIDBySameProcessName(std::string ProcessName, std::vector<PROCESSENTRY32>& ProcessList);
 		//取相同名称进程，成功返回进程id数量。返回-1表示失败。
-		//???
 		
 		DWORD GetCurrentPID();
 		//获取当前进程的PID
 
-		INT GetPIDListByProcessName(std::string ProcessName, std::vector <PROCESSENTRY32>& ProcessList, BOOL Case = FALSE);
+		INT GetPIDListByProcessName(std::string ProcessName, std::vector <PROCESSENTRY32>& ProcessList, bool Case = false);
 		//取指定进程名称的所有进程的进程ID(返回进程ID数目,没有返回0)
 		//Case：区分大小写。TRUE = 区分大小写，FALSE = 不区分大小写
 		//???
@@ -217,7 +217,7 @@ namespace ELL{ // E Language Library 的缩写
 		std::string GetProcessStartTime(DWORD ProcessId = NULL);
 		//返回进程启动时间
 
-		DWORD GetPIDByProcessName(std::string ProcessName, BOOL Case = FALSE);
+		DWORD GetPIDByProcessName(std::string ProcessName, bool Case = false);
 		//通过进程名取进程ID；失败返回0
 		//Case：区分大小写。TRUE = 区分大小写，FALSE = 不区分大小写
 		//???(大小写区分未实现)

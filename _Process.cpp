@@ -121,22 +121,16 @@ INT ELL::Process::Enum(std::vector<PROCESSENTRY32>& ProcessInfoList){
     return number;
 }
 
-VOID ELL::Process::PauseProcess(DWORD ProcessId, BOOL status){
-    /*
+VOID ELL::Process::PauseProcess(DWORD ProcessId, bool status){
+    
     HANDLE handleProcess = OpenProcess(2035711, NULL, ProcessId);
     if (handleProcess == INVALID_HANDLE_VALUE) { return; }
-    PROC procAPIAddress = NULL;
-    if (status) {
-        procAPIAddress = GetProcAddress(GetModuleHandleA("ntdll.dll"),"ZwSuspendProcess");
-        (*procAPIAddress)();
+    PROC procAPIAddress = status ? ELL::GetAPIAddress("ntdll.dll", "ZwSuspendProcess") : ELL::GetAPIAddress("ntdll.dll", "ZwResumeProcess");
+    _asm {
+        push ProcessId;
+        call procAPIAddress;
     }
-    else {
-        procAPIAddress = GetProcAddress(GetModuleHandleA("ntdll.dll"),"ZwResumeProcess");
-        (*procAPIAddress)();
-    }
-    
     CloseHandle(handleProcess);
-    */
     return;
 }
 
@@ -191,6 +185,26 @@ std::string ELL::Process::GetCurrentCommandLine(){
     return GetCommandLineA();
 }
 
+INT ELL::Process::GetPIDBySameProcessName(std::string ProcessName, std::vector<PROCESSENTRY32>& ProcessList){
+    HANDLE handleSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPALL, 0);
+    if (handleSnapshot == INVALID_HANDLE_VALUE) {
+        return -1;
+    }
+    INT number = 0;
+    PROCESSENTRY32 processInfo = { 0 };
+    processInfo.dwSize = sizeof(PROCESSENTRY32);
+    BOOL findBool = Process32First(handleSnapshot, &processInfo);
+    while (findBool != FALSE) {
+        if (ProcessName == processInfo.szExeFile) {
+            number++;
+            ProcessList.push_back(processInfo);
+        }
+        findBool = Process32Next(handleSnapshot, &processInfo);
+    }
+    CloseHandle(handleSnapshot);
+    return number;
+}
+
 DWORD ELL::Process::GetCurrentPID(){
     return GetCurrentProcessId();
 }
@@ -215,7 +229,7 @@ std::string ELL::Process::GetProcessStartTime(DWORD ProcessId){
     return ret;
 }
 
-DWORD ELL::Process::GetPIDByProcessName(std::string ProcessName, BOOL Case){
+DWORD ELL::Process::GetPIDByProcessName(std::string ProcessName, bool Case){
     HANDLE handleSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (handleSnapshot == INVALID_HANDLE_VALUE) {
         return 0;
@@ -252,6 +266,16 @@ BOOL ELL::Process::IsProcess64Bit(DWORD ProcessId){
 
     }
     return false;
+}
+
+INT ELL::Process::GetThreadsNumberByPID(DWORD ProcessId){
+    
+    return 0;
+}
+
+INT ELL::Process::GetThreadsNumberByProcessName(std::string ProcessName){
+
+    return 0;
 }
 
 BOOL ELL::Process::SetCannotOpen(){
@@ -303,4 +327,29 @@ BOOL ELL::Process::TerminateProcessByProcessName(std::string ProcessName, BOOL C
     return terminateResult;
     */
     return 0;
+}
+
+BOOL ELL::Process::IsProcessSuspending(DWORD ProcessId, INT TimeOut){
+    //需先写好窗口相关函数
+    return 0;
+}
+
+BOOL ELL::Process::IsProcessNameVaild(std::string ProcessName, bool Case){
+    HANDLE handleSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    if (handleSnapshot == INVALID_HANDLE_VALUE) {
+        return 0;
+    }
+
+    PROCESSENTRY32 processInfo = { 0 };
+    processInfo.dwSize = sizeof(PROCESSENTRY32);
+    BOOL findBool = Process32First(handleSnapshot, &processInfo);
+    while (findBool != FALSE) {
+        if (ProcessName == processInfo.szExeFile) {//???(大小写区分未实现)
+            CloseHandle(handleSnapshot);
+            return TRUE;
+        }
+        findBool = Process32Next(handleSnapshot, &processInfo);
+    }
+    CloseHandle(handleSnapshot);
+    return FALSE;
 }
