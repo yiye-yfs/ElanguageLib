@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="_Process.cpp" />
+    <ClCompile Include="_String.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ElanguageLib.h" />

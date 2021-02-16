@@ -180,6 +180,13 @@ INT ELL::Process::GetHandleNumber(DWORD ProcessId){
     return count;
 }
 
+std::string ELL::Process::GetProcessUser(DWORD ProcessId){
+    HLOCAL memaddr = LocalAlloc(0, 1024 * 1024);
+    //NtQuerySystemInformation();
+
+    return std::string();
+}
+
 std::string ELL::Process::GetCurrentCommandLine(){
     return GetCommandLineA();
 }
@@ -198,7 +205,7 @@ std::string ELL::Process::GetProcessStartTime(DWORD ProcessId){
     CloseHandle(handleProcess);
     SYSTEMTIME userSystemTime = {};
     FileTimeToSystemTime(&createTime, &userSystemTime);
-    return std::string();//???
+    return 0;//???
 }
 
 DWORD ELL::Process::GetPIDByProcessName(std::string ProcessName, BOOL Case){

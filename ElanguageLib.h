@@ -24,7 +24,7 @@ namespace ELL{ // E Language Library 的缩写
 	}
 
 	namespace String {//字符串(文本)
-
+		std::string FillZero(std::string Str, UINT Lenght);
 	}
 
 	namespace File {//文件
