@@ -25,6 +25,8 @@ namespace ELL{ // E Language Library 的缩写
 
 	namespace String {//字符串(文本)
 		std::string FillZero(std::string Str, UINT Lenght);
+		//当指定文本长度不足时前面自动补零，通用用于数据库序列号
+		//???
 	}
 
 	namespace File {//文件
