@@ -27,6 +27,9 @@
     <ClCompile Include="_String.cpp">
       <Filter>源文件\ElanguageLib</Filter>
     </ClCompile>
+    <ClCompile Include="_ElanguageLib.cpp">
+      <Filter>源文件\ElanguageLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ElanguageLib.h">

@@ -7,6 +7,7 @@
 #include <aclapi.h>
 
 #include <math.h>
+#include <stdlib.h>
 
 #include <string>
 #include <vector>
@@ -14,6 +15,15 @@
 
 namespace ELL{ // E Language Library 的缩写
 	typedef unsigned short int PORT;
+	
+	
+	std::string IntToString(INT Buf);
+	std::string DoubleToString(DOUBLE Buf);
+	//数字转换字符串
+	
+	INT StringToInt(std::string Buf);
+	DOUBLE StringToDouble(std::string Buf);
+	//字符串转换数字
 
 	namespace Window {//窗口
 
@@ -26,7 +36,7 @@ namespace ELL{ // E Language Library 的缩写
 	namespace String {//字符串(文本)
 		std::string FillZero(std::string Str, UINT Lenght);
 		//当指定文本长度不足时前面自动补零，通用用于数据库序列号
-		//???
+
 	}
 
 	namespace File {//文件
