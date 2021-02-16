@@ -274,8 +274,7 @@ BOOL ELL::Process::TerminateProcessByPID(DWORD ProcessId){
     return ret;
 }
 
-BOOL ELL::Process::TerminateProcessByProcessName(std::string ProcessName){
-    /*
+BOOL ELL::Process::TerminateProcessByProcessName(std::string ProcessName, BOOL Case = TRUE) {
     if (ProcessName == "") {
         CHAR tmp[MAX_PATH] = { NULL };
         if (!GetModuleFileNameA(NULL,tmp,MAX_PATH)) {
@@ -283,10 +282,8 @@ BOOL ELL::Process::TerminateProcessByProcessName(std::string ProcessName){
         }
         ProcessName = GetModuleFileNameA(); 
     }
-    HANDLE handleProcess = OpenProcess(1, 0, GetPIDByProcessName(ProcessName, true));
-    bool ret = TerminateProcess(handleProcess, 0) == 1;
-    
-    return ret;
-    */
-    return FALSE;
+    HANDLE handleProcess = OpenProcess(1, 0, ELL::Process::GetPIDByProcessName(ProcessName, Case));
+    BOOL terminateResult = TerminateProcess(handleProcess, 0);
+    CloseHandle(handleProcess);
+    return terminateResult;
 }
