@@ -175,11 +175,33 @@ INT ELL::Process::GetHandleNumber(DWORD ProcessId){
     return count;
 }
 
-std::string ELL::Process::GetProcessUser(DWORD ProcessId){
-    HLOCAL memaddr = LocalAlloc(0, 1024 * 1024);
-    //NtQuerySystemInformation();
+std::string ELL::Process::GetCommandLine32(DWORD ProcessId){
+    typedef DWORD(WINAPI* RTLADJUSTPRIVILEGE)(ULONG,BOOLEAN,BOOLEAN,PBOOLEAN);
+    RTLADJUSTPRIVILEGE RtlAdjustPrivilege = (RTLADJUSTPRIVILEGE)GetProcAddress(LoadLibraryA("ntdll.dll"), "RtlAdjustPrivilege");
+    if (RtlAdjustPrivilege == NULL) { return ""; }
+    return std::string();
+}
+
+std::string ELL::Process::GetCommandLine64(DWORD ProcessId){
 
     return std::string();
+}
+
+std::string ELL::Process::GetProcessUser(DWORD ProcessId){
+    HLOCAL memaddr = LocalAlloc(0, 1024 * 1024);
+    typedef DWORD(WINAPI* PQUERYSYSTEM)(UINT, PVOID, DWORD, PDWORD);
+    PQUERYSYSTEM NtQuerySystemInformation = (PQUERYSYSTEM)GetProcAddress(LoadLibraryA("ntdll.dll"), "NtQuerySystemInformation");
+    if (NtQuerySystemInformation == NULL) { return ""; }
+    DWORD lRetVal = NtQuerySystemInformation(5, memaddr, 1024 * 1024, NULL);
+    if (lRetVal == NULL){
+        typedef VOID(WINAPI* RTLMOVEMEMORY)(VOID UNALIGNED* ,const VOID UNALIGNED* ,SIZE_T);
+        RTLMOVEMEMORY RtlMoveMemory = (RTLMOVEMEMORY)GetProcAddress(LoadLibraryA("kernel32.dll"),"RtlMoveMemory");
+        if (RtlMoveMemory == NULL) { return ""; }
+
+
+    }
+    LocalFree(memaddr);
+    return "";
 }
 
 std::string ELL::Process::GetCurrentCommandLine(){
