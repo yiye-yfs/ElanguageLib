@@ -8,7 +8,7 @@ using namespace ELL;
 
 int main() {
 	
-	Process::PauseProcess(Process::GetPIDByProcessName("HMCL-3.1.94.exe"),true);
+	Process::PauseProcess(Process::GetPIDByProcessName("taskmgr.exe"),true);
 	while (1);
 	return 0;
 }

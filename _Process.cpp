@@ -125,9 +125,12 @@ VOID ELL::Process::PauseProcess(DWORD ProcessId, bool status){
     
     HANDLE handleProcess = OpenProcess(2035711, NULL, ProcessId);
     if (handleProcess == INVALID_HANDLE_VALUE) { return; }
-    typedef VOID(*NtCall)(DWORD);
-    NtCall procAPIAddress = status ? (NtCall)ELL::GetAPIAddress("ntdll.dll", "ZwSuspendProcess") : (NtCall)ELL::GetAPIAddress("ntdll.dll", "ZwResumeProcess");
-    (*procAPIAddress)(ProcessId);
+
+    typedef VOID (WINAPI *NTCALL)(DWORD);
+    NTCALL WINAPI procAPIAddress = status ? (NTCALL)ELL::GetAPIAddress("ntdll.dll", "ZwSuspendProcess") : (NTCALL)ELL::GetAPIAddress("ntdll.dll", "ZwResumeProcess");
+    if (procAPIAddress != NULL) {
+        (*procAPIAddress)(ProcessId);
+    }
     CloseHandle(handleProcess);
     return;
 }
