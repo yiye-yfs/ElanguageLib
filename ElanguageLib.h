@@ -130,7 +130,6 @@ namespace ELL{ // E Language Library 的缩写
 		VOID PauseProcess(DWORD ProcessId, bool status = true);
 		//将指定进程暂停(无返回值)
 		//status：false = 恢复进程,true = 暂停进程
-		//???
 
 		UINT GetMemoryUseSituation(DWORD ProcessId = NULL, INT ShowType = 1);
 		//查看指定进程ID的内存使用情况
