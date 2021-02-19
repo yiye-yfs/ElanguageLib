@@ -35,6 +35,11 @@ namespace ELL{ // E Language Library 的缩写
 		std::string FillZero(std::string Str, UINT Lenght);
 		//当指定文本长度不足时前面自动补零，通用用于数据库序列号
 
+		std::string HigherCaseToLowerCase(std::string Str);
+		//大写字母转换小写字母
+
+		std::string LowerCaseToHigherCase(std::string Str);
+		//小写字母转换大写字母
 	}
 
 	namespace File {//文件
@@ -168,7 +173,7 @@ namespace ELL{ // E Language Library 的缩写
 		//检测进程是否被暂停，亦可用于窗口是否假死
 		//TimeOut：检测窗口的响应时间，超时则为假死，单位：毫秒；可空，默认100毫秒
 		//???
-
+		
 		BOOL IsProcessNameVaild(std::string ProcessName, bool Case = false);
 		//判断指定进程是否存在(此判断与进程其它信息无关联)(存在返回TRUE，不存在或失败返回FALSE)
 		//Case：区分大小写。TRUE = 区分大小写，FALSE = 不区分大小写
