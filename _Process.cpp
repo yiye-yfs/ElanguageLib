@@ -291,12 +291,12 @@ BOOL ELL::Process::IsProcess64Bit(DWORD ProcessId){
     return false;
 }
 
-INT ELL::Process::GetThreadsNumberByPID(DWORD ProcessId){
+UINT ELL::Process::GetThreadsNumberByPID(DWORD ProcessId){
     
     return 0;
 }
 
-INT ELL::Process::GetThreadsNumberByProcessName(std::string ProcessName){
+UINT ELL::Process::GetThreadsNumberByProcessName(std::string ProcessName){
 
     return 0;
 }
@@ -367,7 +367,10 @@ BOOL ELL::Process::IsProcessNameVaild(std::string ProcessName, bool Case){
     processInfo.dwSize = sizeof(PROCESSENTRY32);
     BOOL findBool = Process32First(handleSnapshot, &processInfo);
     while (findBool != FALSE) {
-        if (ProcessName == processInfo.szExeFile) {//???(大小写区分未实现)
+        if (!Case) {
+            ProcessName = ELL::String::HigherCaseToLowerCase(ProcessName);
+        }
+        if (ProcessName == processInfo.szExeFile) {
             CloseHandle(handleSnapshot);
             return TRUE;
         }

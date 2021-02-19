@@ -174,20 +174,19 @@ namespace ELL{ // E Language Library 的缩写
 		//TimeOut：检测窗口的响应时间，超时则为假死，单位：毫秒；可空，默认100毫秒
 		//???
 		
-		BOOL IsProcessNameVaild(std::string ProcessName, bool Case = false);
+		BOOL IsProcessNameVaild(std::string ProcessName, bool Case = true);
 		//判断指定进程是否存在(此判断与进程其它信息无关联)(存在返回TRUE，不存在或失败返回FALSE)
-		//Case：区分大小写。TRUE = 区分大小写，FALSE = 不区分大小写
-		//??? （未实现大小写）
+		//Case：区分大小写。TRUE = 区分大小写，FALSE = 不区分大小写(小写)
 
 		BOOL IsProcess64Bit(DWORD ProcessId = NULL);
 		//判断进程是否为64位
 
-		INT GetThreadsNumberByPID(DWORD ProcessId);
-		INT GetThreadsNumberByProcessName(std::string ProcessName);
+		UINT GetThreadsNumberByPID(DWORD ProcessId);
+		UINT GetThreadsNumberByProcessName(std::string ProcessName);
 		//通过进程ID或进程名获取指定进程线程数。
 		//???
 
-		INT GetSystemProcessList(std::vector <PROCESSENTRY32>& SystemProcessList);
+		UINT GetSystemProcessList(std::vector <PROCESSENTRY32>& SystemProcessList);
 		//失败返回0，成功返回进程数量
 		//???
 
@@ -212,6 +211,10 @@ namespace ELL{ // E Language Library 的缩写
 		
 		DWORD GetCurrentPID();
 		//获取当前进程的PID
+
+		std::string GetCurrentProcessName();
+		//获取自身进程名
+		//???
 
 		INT GetPIDListByProcessName(std::string ProcessName, std::vector <PROCESSENTRY32>& ProcessList, bool Case = false);
 		//取指定进程名称的所有进程的进程ID(返回进程ID数目,没有返回0)
