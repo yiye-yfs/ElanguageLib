@@ -146,7 +146,7 @@ namespace ELL{ // E Language Library 的缩写
 		INT GetHandleNumber(DWORD ProcessId = NULL);
 		//获取指定进程句柄数量,与XP系统任务管理器功能一样，失败返回-1。特殊进程需要特权
 
-		std::string GetCommandLine32(DWORD ProcessId);
+		std::string GetCommandLine32(DWORD ProcessId); 
 		//取指定进程ID的命令行.32位系统专用
 		//???
 

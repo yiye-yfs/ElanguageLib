@@ -186,7 +186,7 @@ std::string ELL::Process::GetCommandLine64(DWORD ProcessId){
 
     return std::string();
 }
-
+ 
 std::string ELL::Process::GetProcessUser(DWORD ProcessId){
     HLOCAL memaddr = LocalAlloc(0, 1024 * 1024);
     typedef DWORD(WINAPI* PQUERYSYSTEM)(UINT, PVOID, DWORD, PDWORD);
