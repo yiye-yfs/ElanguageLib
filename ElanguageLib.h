@@ -19,6 +19,8 @@ namespace ELL{ // E Language Library 的缩写
 	DOUBLE StringToDouble(std::string Buf);
 	//字符串转换数字
 	
+	PROC GetAPIAddress(std::string DllName, std::string APIName);
+	//获取API的调用地址
 
 
 	namespace Window {//窗口
@@ -163,7 +165,7 @@ namespace ELL{ // E Language Library 的缩写
 		//设置一个进程的优先级别,成功返回TRUE，失败返回FALSE。特殊进程需要特权
 
 		BOOL TerminateProcessByPID(DWORD ProcessId = NULL);
-		BOOL TerminateProcessByProcessName(std::string ProcessName, BOOL Case = TRUE);//???
+		BOOL TerminateProcessByProcessName(std::string ProcessName = "", BOOL Case = TRUE);//???
 		//结束指定进程。成功返回TRUE，失败返回FALSE。
 
 
