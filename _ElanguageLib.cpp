@@ -8,7 +8,3 @@ INT ELL::StringToInt(std::string Buf){
 DOUBLE ELL::StringToDouble(std::string Buf){
     return DOUBLE();
 }
-
-PROC ELL::GetAPIAddress(std::string DllName, std::string APIName){
-    return GetProcAddress(LoadLibraryA(DllName.c_str()),APIName.c_str());
-}

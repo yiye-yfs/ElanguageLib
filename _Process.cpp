@@ -179,11 +179,20 @@ std::string ELL::Process::GetCommandLine32(DWORD ProcessId){
     typedef DWORD(WINAPI* RTLADJUSTPRIVILEGE)(ULONG,BOOLEAN,BOOLEAN,PBOOLEAN);
     RTLADJUSTPRIVILEGE RtlAdjustPrivilege = (RTLADJUSTPRIVILEGE)GetProcAddress(LoadLibraryA("ntdll.dll"), "RtlAdjustPrivilege");
     if (RtlAdjustPrivilege == NULL) { return ""; }
+    RtlAdjustPrivilege(20, TRUE, NULL, NULL);
+    
     return std::string();
 }
 
 std::string ELL::Process::GetCommandLine64(DWORD ProcessId){
+    typedef DWORD(WINAPI* RTLADJUSTPRIVILEGE)(ULONG, BOOLEAN, BOOLEAN, PBOOLEAN);
+    RTLADJUSTPRIVILEGE RtlAdjustPrivilege = (RTLADJUSTPRIVILEGE)GetProcAddress(LoadLibraryA("ntdll.dll"), "RtlAdjustPrivilege");
+    if (RtlAdjustPrivilege == NULL) { return ""; }
+    RtlAdjustPrivilege(20, TRUE, FALSE, NULL);
+    HANDLE handleProcess = OpenProcess(1040, 0, ProcessId);
+    if (handleProcess != NULL) {
 
+    }
     return std::string();
 }
 
